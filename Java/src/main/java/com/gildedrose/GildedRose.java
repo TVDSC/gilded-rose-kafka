@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Arrays;
+
 class GildedRose {
     Item[] items;
 
@@ -7,8 +9,14 @@ class GildedRose {
         this.items = items;
     }
 
-    public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
+    public void updateAllItems() {
+        Arrays.stream(items).forEach(item -> {
+            if (item instanceof ActionableItem) {
+                ((ActionableItem) item).updateQuality();
+                ((ActionableItem) item).updateSellIn();
+            }
+        });
+        /*for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
@@ -57,6 +65,6 @@ class GildedRose {
                     }
                 }
             }
-        }
+        }*/
     }
 }
